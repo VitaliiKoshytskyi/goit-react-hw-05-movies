@@ -1,0 +1,11 @@
+.link{
+    color:rgb(9, 9, 9);
+    padding: 10px;
+    margin: 20px;
+    
+}
+:global(.active){
+    color: rgb(231, 9, 9);
+    border: 1px solid gold;
+    border-radius: 10px;
+}
