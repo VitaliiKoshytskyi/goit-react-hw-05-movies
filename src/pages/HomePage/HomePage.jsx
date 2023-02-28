@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 import { getMovies } from 'services/moviesAPI'
 
@@ -28,9 +29,28 @@ const HomePage = () => {
     
   }, []);
 
+    const elements = state.map(item => {
+        console.log(item.backdrop_path)
+        return (
 
-    return (
-        <h2 className={css.title}>Home</h2>
+            <Link>
+            <li key={item.id}>
+            <p>{item.title}</p>
+            <img src={`https://image.tmdb.org/t/p/w500/${item.backdrop_path}`} alt="" />
+        </li>
+            
+            </Link>
+        )
+        
+        
+    })
+    console.log(elements)
+    return (<>
+    
+        <h2 className={css.title}>Trending Today</h2>
+        {elements}
+    </>
+        
     )
     
 }
