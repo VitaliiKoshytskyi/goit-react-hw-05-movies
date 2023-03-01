@@ -10,3 +10,7 @@ const moviesInstance = axios.create({
 export const getMovies = () => {
   return moviesInstance.get('/trending/movie/day');
 };
+
+export const getMovieDetails = (id) => {
+  return moviesInstance.get(`/movie/${id}`)
+}
