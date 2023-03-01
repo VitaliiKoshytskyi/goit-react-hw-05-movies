@@ -14,3 +14,15 @@ export const getMovies = () => {
 export const getMovieDetails = (id) => {
   return moviesInstance.get(`/movie/${id}`)
 }
+
+
+
+export const getSearchMovies = () => {
+  return moviesInstance.get('/search/movie', {
+    params: {
+      include_adult: 'false',
+      page: 1,
+      query:'terminator'
+  } })
+}
+
