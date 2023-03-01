@@ -17,12 +17,12 @@ export const getMovieDetails = (id) => {
 
 
 
-export const getSearchMovies = () => {
+export const getSearchMovies = (query) => {
   return moviesInstance.get('/search/movie', {
     params: {
       include_adult: 'false',
       page: 1,
-      query:'terminator'
+      query,
   } })
 }
 
