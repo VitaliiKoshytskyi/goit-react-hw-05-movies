@@ -8,6 +8,8 @@ import { getSearchMovies } from 'services/moviesAPI';
 
 const MoviesPage = () => {
   const [movies, setMovies] = useState([]);
+  const [error, setError] = useState('');
+  const [total, setTotal] = useState(null)
   const [searchParams, setSearchParams] = useSearchParams();
   const search = searchParams.get('search');
 
@@ -17,12 +19,12 @@ const MoviesPage = () => {
     const fetchData = async () => {
       try {
         const { data } = await getSearchMovies(search);
-
+        setTotal(data.total_results )
         setMovies(prevState => {
           return [...prevState, ...data.results];
         });
       } catch (response) {
-        console.log(response.message);
+        setError(response.message || 'Oops sothing wrong');
       }
     };
     if (search) {
@@ -53,7 +55,9 @@ const MoviesPage = () => {
   return (
     <div>
       <Searchbar onSubmit={updateSearch} />
-      <ul className={css.list}>{elements}</ul>
+      {movies.length > 0 && <ul className={css.list}>{elements}</ul>}
+      {error && <p>{error}</p>}
+      {total === 0 &&<p>Ooopps! we found nothing</p>}
     </div>
   );
 };

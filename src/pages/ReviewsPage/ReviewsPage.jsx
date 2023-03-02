@@ -5,13 +5,16 @@ import { getMovieReviews } from 'services/moviesAPI';
 const ReviewsPage = () => {
   const params = useParams();
   const [state, setState] = useState([]);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const { data } = await getMovieReviews(params.movieId);
         setState({ data });
-      } catch ({ message }) {}
+      } catch (response) {
+        setError(response.message || 'Oops sothing wrong');
+      }
     };
 
     fetchData();
@@ -30,7 +33,11 @@ const ReviewsPage = () => {
     </li>
   ));
 
-  return <ul>{element}</ul>;
+  return <ul>
+     {error && <p>{error}</p>}
+    {element}
+    {reviews.length===0&&<p>Ooppsss no reviews found</p>}
+  </ul>;
 };
 
 export default ReviewsPage;

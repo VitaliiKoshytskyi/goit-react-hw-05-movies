@@ -6,13 +6,16 @@ import css from './Cast.module.css';
 const CastPage = () => {
   const params = useParams();
   const [state, setState] = useState([]);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const { data } = await getMovieCredits(params.movieId);
         setState({ data });
-      } catch ({ message }) {}
+      } catch (response) {
+        setError(response.message || 'Oops sothing wrong');
+      }
     };
 
     fetchData();
@@ -39,7 +42,11 @@ const CastPage = () => {
     );
   });
 
-  return <ul className={css.list}>{element}</ul>;
+  return <ul className={css.list}>
+    {element}
+    {error && <p>{error}</p>}
+    {cast.length===0&&<p>Ooppsss no casts found</p>}
+  </ul>;
 };
 
 export default CastPage;

@@ -6,6 +6,7 @@ import css from './HomePage.module.css';
 
 const HomePage = () => {
   const [state, setState] = useState([]);
+  const [error, setError] = useState('');
   const location = useLocation();
 
   useEffect(() => {
@@ -15,8 +16,8 @@ const HomePage = () => {
         setState(prevState => {
           return [...prevState, ...data.results];
         });
-      } catch ({ message }) {
-        console.log(message);
+      } catch ( response ) {
+        setError(response.message || 'Oops sothing wrong');
       } finally {
       }
     };
@@ -43,6 +44,7 @@ const HomePage = () => {
 
   return (
     <div className={css.container}>
+       {error && <p>{error}</p>}
       <h3 className={css.title}>Trending Today</h3>
       <ul className={css.list}>{elements}</ul>
     </div>
