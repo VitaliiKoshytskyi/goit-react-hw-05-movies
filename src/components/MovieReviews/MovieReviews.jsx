@@ -1,53 +1,36 @@
-
-
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { getMovieReviews} from "services/moviesAPI";
-
-
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { getMovieReviews } from 'services/moviesAPI';
 
 const MovieReviews = () => {
-    
+  const params = useParams();
+  const [state, setState] = useState([]);
 
-    const params = useParams();
-    const [state, setState] = useState([])
-
-     useEffect(() => {
+  useEffect(() => {
     const fetchData = async () => {
       try {
-          const { data } = await getMovieReviews(params.movieId);
-          console.log(data.results)
+        const { data } = await getMovieReviews(params.movieId);
 
         setState({ data });
-      } catch ({ message }) {
-      } 
-      };
-      
-           fetchData();
-        
-     }, [params.movieId]);
-    
-     if (!state.data) {
-        return
-    }
-    
-    
+      } catch ({ message }) {}
+    };
 
-    const reviews = state.data.results
-    
-    
-    
-    const element = reviews.map(item => {
-        
-        return <li><p>{item.author}</p>
-            <p>{item.content}</p>
-             
-        </li>
-    })
+    fetchData();
+  }, [params.movieId]);
 
-    return element
-    
+  if (!state.data) {
+    return;
+  }
 
-}
+  const reviews = state.data.results;
 
-export default MovieReviews
+  const element = reviews.map(item => (
+    <li key={item.id}>
+      <p>{item.author}</p> <p>{item.content}</p>
+    </li>
+  ));
+
+  return element;
+};
+
+export default MovieReviews;

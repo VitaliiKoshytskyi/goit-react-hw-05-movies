@@ -1,18 +1,16 @@
 // import css from './SearchMovies.module.css';
 import { useState, useEffect } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams, useLocation} from 'react-router-dom';
 
 import Searchbar from 'components/SearchBar/SearchBar';
 import { getSearchMovies } from 'services/moviesAPI';
 
 const SearchMovies = () => {
   const [movies, setMovies] = useState([]);
-  const [error, setError] = useState(null);
-    // const [search, setSearch] = useState('');
-    const [searchParams, setSearchParams] = useSearchParams()
-    const search = searchParams.get("search")
+  const [searchParams, setSearchParams] = useSearchParams();
+  const search = searchParams.get('search');
   
-
+const location = useLocation()
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -23,31 +21,29 @@ const SearchMovies = () => {
           return [...prevState, ...data.results];
         });
       } catch (response) {
-          
-        setError(response.message || 'Oooopppsss! Try again');
+        console.log(response.message);
       }
     };
     if (search) {
-    fetchData();
+      fetchData();
     }
   }, [search]);
 
   const updateSearch = search => {
     setMovies([]);
-    //   setSearch(search);
-      setSearchParams({search})
+    setSearchParams({ search });
   };
 
   const elements = movies.map(item => {
     const itembackdrop =
       item.backdrop_path === null
         ? 'https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg'
-        : `https://image.tmdb.org/t/p/w500/${item.backdrop_path}`;
+        : `https://image.tmdb.org/t/p/w500/${item.poster_path}`;
     return (
       <li key={item.id}>
-        <Link to={`/movies/${item.id}`}>
+        <Link to={`/movies/${item.id}`} state={{ from:location}}>
           <p>{item.title}</p>
-          <img src={itembackdrop} alt={item.title} width='200'  />
+          <img src={itembackdrop} alt={item.title} width="200" />
         </Link>
       </li>
     );
@@ -55,9 +51,7 @@ const SearchMovies = () => {
 
   return (
     <>
-          <Searchbar onSubmit={updateSearch} />
-           {error && <p>{error}</p>}
-
+      <Searchbar onSubmit={updateSearch} />
       <ul>{elements}</ul>
     </>
   );
