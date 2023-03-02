@@ -62,9 +62,9 @@ const MoviesPage = () => {
 
     return (
         <div>
-            <h2 className={css.title}>Movies</h2>
+            
             <Searchbar onSubmit={updateSearch} />
-      <ul>{elements}</ul>
+      <ul className={css.list}>{elements}</ul>
         
 
         </div>

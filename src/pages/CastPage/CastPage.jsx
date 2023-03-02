@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMovieCredits } from 'services/moviesAPI';
+import css from './Cast.module.css'
 
 const CastPage = () => {
       const params = useParams();
@@ -31,16 +32,17 @@ const CastPage = () => {
         : `https://image.tmdb.org/t/p/w500/${item.profile_path}`;
 
     return (
-      <li key={item.id}>
+      <li  key={item.id}>
+        <img className={css.img} src={backdrop} width="100" alt="" />
         <p>{item.name}</p>
-        <p>{item.character}</p>
-        <img src={backdrop} width="100" alt="" />
+        <p>Character: {item.character}</p>
+       
       </li>
     );
   });
     
-    return <ul>
-        <li>CAST PAGE</li>
+    return <ul className={css.list}>
+       
         {element}
        
     </ul>

@@ -1,4 +1,4 @@
-// import css from './MovieDetailsPage.module.css'
+import css from './MovieDetailsPage.module.css'
 
 import { useState, useEffect } from 'react';
 import {
@@ -13,22 +13,13 @@ import {
 
 import { getMovieDetails } from 'services/moviesAPI';
 
-
-
-
 const MovieDetailsPage = () => {
-     const [state, setState] = useState({});
+  const [state, setState] = useState({});
   const location = useLocation();
-  const from= location.state?.from || '/'
-  
+  const from = location.state?.from || '/';
 
   const params = useParams();
-    const navigate = useNavigate();
-    
-
-
-
-
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -54,41 +45,52 @@ const MovieDetailsPage = () => {
   const genresResults = genres.map(item => (
     <li key={item.name}>{item.name}</li>
   ));
-const votes = Math.round(vote_average*10) 
+  const votes = Math.round(vote_average * 10);
+
+  const date = new Date(release_date);
+  const year = date.getFullYear(release_date);
+  
+
+
   return (
     <div>
-      <div>
-        <button onClick={goBack}>Go back</button>
+      <div className={css.button}>
+        <button  onClick={goBack}>Go back</button>
       </div>
-      <h2>{title}</h2>
-      <img
-        src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
-        alt=""
-        width="200"
-      />
-      <p>{overview}</p>
-      <ul>{genresResults}</ul>
-      <p>{votes}%</p>
-      <p>{release_date}</p>
-      <div>
-        <h3>Additional Information</h3>
-        <Link to={`cast`} state={{ from }} >Cast</Link>
-        <Link to={`reviews`} state={{ from }}> Reviews</Link>
-        <Outlet />
+      <div className={css.mainBox}>
+        <div className={css.yearBox}>
+           <h2>{title}</h2>
+          <p className={css.year}>{'('}{year}{')'}</p>
+          
         
+        </div>
+        
+        <img className={css.img}
+          src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
+          alt=""
+          width="350"
+        />
+        <p className={css.score}>User score: {votes}%</p>
+        
+        <p className={css.overview}>Overview: {overview}</p>
+        <ul className={css.genres}>Genres:{genresResults}</ul>
+        
+        
+      </div>
+
+      <div className={css.loverBox}>
+        <h3>Additional Information</h3>
+        <Link className={css.loverLink} to={`cast`} state={{ from }}>
+          Cast |
+        </Link>
+        <Link className={css.loverLink}
+          to={`reviews`} state={{ from }}>
+          {' '}
+          Reviews
+        </Link>
+        <Outlet />
       </div>
     </div>
   );
-    
-}
-export default MovieDetailsPage
-
-
-
-
-
- 
-
-
-
-
+};
+export default MovieDetailsPage;

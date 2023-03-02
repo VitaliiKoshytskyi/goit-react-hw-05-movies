@@ -1,0 +1,43 @@
+.yearBox{
+    display: flex;
+    justify-content: center;
+}
+.year{
+    margin-left: 20px;
+
+}
+.mainBox{
+   margin-left: auto;
+}
+.overview{
+    width: 300px;
+    margin: 0 auto;
+}
+.genres{
+    padding: 20px;
+    text-align: center;
+}
+.img{
+    
+    margin: 0 auto;
+}
+.score{
+    padding: 20px;
+    text-align: center;
+}
+.loverBox {
+    text-align: center;
+    padding: 30px;
+    
+}
+
+.loverLink{
+  
+        text-decoration: none;
+            
+            
+}
+.button{
+    
+    text-align: center;
+}

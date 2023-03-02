@@ -28,12 +28,13 @@ const ReviewsPage = () => {
 
   const element = reviews.map(item => (
     <li key={item.id}>
-      <p>{item.author}</p> <p>{item.content}</p>
+      <p>Author: {item.author}</p>
+      <p>{item.content}</p>
     </li>
   ));
 
      return <ul>
-         <li>Reviews Page</li>
+         
          {element}
     </ul>
 }

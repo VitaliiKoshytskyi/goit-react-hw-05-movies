@@ -1,11 +1,12 @@
 import PagesMenu from "components/PagesMenu/PagesMenu";
+import css from './NavBar.module.css'
 
 
 const NavBar = () => {
     
 
     return (
-        <header>
+        <header className={css.header}>
             <PagesMenu />
         </header>
     )

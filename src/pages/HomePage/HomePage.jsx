@@ -34,22 +34,22 @@ const HomePage = () => {
 
   const elements = state.map(item => (
     <li key={item.id}>
-      <Link to={`/movies/${item.id}`} state={{ from: location }}>
-        <p>{item.title}</p>
+      <Link className={css.link} to={`/movies/${item.id}`} state={{ from: location }}>
+        <p className={css.title}>{item.title}</p>
         <img
           src={`https://image.tmdb.org/t/p/w500/${item.poster_path}`}
           alt={item.title}
-          width={300}
+          width={350}
         />
       </Link>
     </li>
   ));
  
     return (
-        <div>
-            <h2 className={css.title}>Home Page</h2>
-             <h3 className={css.title}>Trending Today</h3>
-      <ul>{elements}</ul>
+        <div className={css.container}>
+            
+      <h3 className={css.title}>Trending Today</h3>
+      <ul className={css.list}>{elements}</ul>
         
         </div>
     )
