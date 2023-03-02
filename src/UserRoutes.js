@@ -6,6 +6,8 @@ import HomePage from 'pages/HomePage/HomePage';
 import MoviesPage from 'pages/MoviesPage/MoviesPage';
 import MovieDetailsPage from 'pages/MovieDetailsPage/MovieDetailsPage';
 import NotFoundPage from 'pages/NotFoundPage/NotFoundPage';
+import CastPage from 'pages/CastPage/CastPage';
+import ReviewsPage from 'pages/ReviewsPage/ReviewsPage';
 
 
 
@@ -16,7 +18,9 @@ const UserRoutes = () => {
         <Route path='/' element={<HomePage />} />
         <Route path='/movies' element={<MoviesPage />} />
         <Route path='/movies/:movieId' element={<MovieDetailsPage />} />
-        <Route path="*" element={<NotFoundPage/>} />
+        <Route path="*" element={<NotFoundPage />} />
+        <Route path='/movies/:movieId/cast' element={<CastPage />} />
+        <Route path='/movies/:movieId/reviews' element={<ReviewsPage />} />
         {/* <Route path="*" element={<HomePage />} /> */}
         
         

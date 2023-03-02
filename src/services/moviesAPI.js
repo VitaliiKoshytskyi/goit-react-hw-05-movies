@@ -15,7 +15,12 @@ export const getMovieDetails = (id) => {
   return moviesInstance.get(`/movie/${id}`)
 }
 
-
+export const getMovieCredits = (id) => {
+  return moviesInstance.get(`/movie/${id}/credits`)
+}
+export const getMovieReviews = (id) => {
+  return moviesInstance.get(`/movie/${id}/reviews`)
+}
 
 export const getSearchMovies = (query) => {
   return moviesInstance.get('/search/movie', {
