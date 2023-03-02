@@ -1,23 +1,14 @@
-import css from './MovieDetailsPage.module.css'
+import css from './MovieDetailsPage.module.css';
 
 import { useState, useEffect } from 'react';
-import {
-  useParams,
-  useNavigate,
-  Link,
-  Outlet,
-  useLocation,
-} from 'react-router-dom';
-
-// import css from './Movies.module.css';
-
+import { useParams, useNavigate, Link, Outlet, useLocation,} from 'react-router-dom';
 import { getMovieDetails } from 'services/moviesAPI';
 
 const MovieDetailsPage = () => {
   const [state, setState] = useState({});
+
   const location = useLocation();
   const from = location.state?.from || '/';
-
   const params = useParams();
   const navigate = useNavigate();
 
@@ -25,7 +16,6 @@ const MovieDetailsPage = () => {
     const fetchData = async () => {
       try {
         const { data } = await getMovieDetails(params.movieId);
-
         setState({ data });
       } catch ({ message }) {}
     };
@@ -46,36 +36,33 @@ const MovieDetailsPage = () => {
     <li key={item.name}>{item.name}</li>
   ));
   const votes = Math.round(vote_average * 10);
-
   const date = new Date(release_date);
   const year = date.getFullYear(release_date);
-  
-
 
   return (
     <div>
       <div className={css.button}>
-        <button  onClick={goBack}>Go back</button>
+        <button onClick={goBack}>Go back</button>
       </div>
       <div className={css.mainBox}>
         <div className={css.yearBox}>
-           <h2>{title}</h2>
-          <p className={css.year}>{'('}{year}{')'}</p>
-          
-        
+          <h2>{title}</h2>
+          <p className={css.year}>
+            {'('}
+            {year}
+            {')'}
+          </p>
         </div>
-        
-        <img className={css.img}
+
+        <img
+          className={css.img}
           src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
           alt=""
           width="350"
         />
         <p className={css.score}>User score: {votes}%</p>
-        
         <p className={css.overview}>Overview: {overview}</p>
         <ul className={css.genres}>Genres:{genresResults}</ul>
-        
-        
       </div>
 
       <div className={css.loverBox}>
@@ -83,8 +70,7 @@ const MovieDetailsPage = () => {
         <Link className={css.loverLink} to={`cast`} state={{ from }}>
           Cast |
         </Link>
-        <Link className={css.loverLink}
-          to={`reviews`} state={{ from }}>
+        <Link className={css.loverLink} to={`reviews`} state={{ from }}>
           {' '}
           Reviews
         </Link>

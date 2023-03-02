@@ -1,17 +1,16 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMovieCredits } from 'services/moviesAPI';
-import css from './Cast.module.css'
+import css from './Cast.module.css';
 
 const CastPage = () => {
-      const params = useParams();
-    const [state, setState] = useState([]);
-    
-    useEffect(() => {
+  const params = useParams();
+  const [state, setState] = useState([]);
+
+  useEffect(() => {
     const fetchData = async () => {
       try {
         const { data } = await getMovieCredits(params.movieId);
-
         setState({ data });
       } catch ({ message }) {}
     };
@@ -21,9 +20,9 @@ const CastPage = () => {
 
   if (!state.data) {
     return;
-    }
-    
-     const cast = state.data.cast;
+  }
+
+  const cast = state.data.cast;
 
   const element = cast.map(item => {
     const backdrop =
@@ -32,38 +31,15 @@ const CastPage = () => {
         : `https://image.tmdb.org/t/p/w500/${item.profile_path}`;
 
     return (
-      <li  key={item.id}>
+      <li key={item.id}>
         <img className={css.img} src={backdrop} width="100" alt="" />
         <p>{item.name}</p>
         <p>Character: {item.character}</p>
-       
       </li>
     );
   });
-    
-    return <ul className={css.list}>
-       
-        {element}
-       
-    </ul>
-}
 
-export default CastPage
+  return <ul className={css.list}>{element}</ul>;
+};
 
-
-
-
-
-
-
-
-
-
-  
-
- 
-
-  
-
-
-
+export default CastPage;

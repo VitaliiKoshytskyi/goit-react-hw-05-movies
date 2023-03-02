@@ -2,17 +2,14 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMovieReviews } from 'services/moviesAPI';
 
-
 const ReviewsPage = () => {
-    const params = useParams();
-    const [state, setState] = useState([]);
-    
+  const params = useParams();
+  const [state, setState] = useState([]);
 
-     useEffect(() => {
+  useEffect(() => {
     const fetchData = async () => {
       try {
         const { data } = await getMovieReviews(params.movieId);
-
         setState({ data });
       } catch ({ message }) {}
     };
@@ -22,9 +19,9 @@ const ReviewsPage = () => {
 
   if (!state.data) {
     return;
-    }
-    
-    const reviews = state.data.results;
+  }
+
+  const reviews = state.data.results;
 
   const element = reviews.map(item => (
     <li key={item.id}>
@@ -33,10 +30,7 @@ const ReviewsPage = () => {
     </li>
   ));
 
-     return <ul>
-         
-         {element}
-    </ul>
-}
+  return <ul>{element}</ul>;
+};
 
-export default ReviewsPage
+export default ReviewsPage;
