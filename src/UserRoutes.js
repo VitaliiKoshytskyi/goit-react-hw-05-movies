@@ -17,10 +17,13 @@ const UserRoutes = () => {
          <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/movies' element={<MoviesPage />} />
-        <Route path='/movies/:movieId' element={<MovieDetailsPage />} />
+        <Route path='/movies/:movieId' element={<MovieDetailsPage />} >
+          <Route path='cast' element={<CastPage />} />
+          <Route path='reviews' element={<ReviewsPage />} />
+        </Route>
         <Route path="*" element={<NotFoundPage />} />
-        <Route path='/movies/:movieId/cast' element={<CastPage />} />
-        <Route path='/movies/:movieId/reviews' element={<ReviewsPage />} />
+        
+        
         {/* <Route path="*" element={<HomePage />} /> */}
         
         

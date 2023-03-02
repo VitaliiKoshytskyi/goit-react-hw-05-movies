@@ -1,5 +1,6 @@
 import MovieReviews from "components/MovieReviews/MovieReviews"
 
+
 const ReviewsPage = () => {
     
 
